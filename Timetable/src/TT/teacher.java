@@ -12,17 +12,17 @@ public class teacher extends tt {
 	{
 		if(flag[i][j]==1) return false;
 		else 
-		return true;
+			return true;
 	}
-    void allot(int i,int j,int a)
-    {
-    	t[i][j]=a;
-    	flag[i][j]=1;
-    }
-    void unallot(int i,int j)
-    {
-    	t[i][j]=-1;
-    	flag[i][j]=0;
-    
-    }
+	void allot(int i,int j,int a)
+	{
+		t[i][j]=a;
+		flag[i][j]=1;
+	}
+	void unallot(int i,int j)
+	{
+		t[i][j]=-1;
+		flag[i][j]=0;
+
+	}
 }
