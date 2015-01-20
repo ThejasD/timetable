@@ -1,4 +1,4 @@
-package TT;
+package in.bmsce.timetable;
 import java.sql.*;
 public class Table {
 
@@ -14,13 +14,13 @@ public class Table {
 		days[4]="friday";
 		days[5]="saturday";
 		
-		teacher te[]=new teacher[6];
+		Faculty te[]=new Faculty[6];
 		for(int i=0;i<6;i++)
-			te[i]=new teacher();
-		subject su[]=new subject[6];
-		subject spc[]=new subject[7];
-		su[0]=new subject(0,0,1);
-		spc[0]=new subject(0,0,1);
+			te[i]=new Faculty();
+		TermSubject su[]=new TermSubject[6];
+		TermSubject spc[]=new TermSubject[7];
+		su[0]=new TermSubject(0,0,1);
+		spc[0]=new TermSubject(0,0,1);
 		try{    
 			Class.forName("oracle.jdbc.driver.OracleDriver"); 			
 			Connection con=DriverManager.getConnection(  
@@ -32,7 +32,7 @@ public class Table {
 			//System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getInt(3));  
 			{
 			
-				su[i]=new subject(rs.getInt(1),rs.getInt(2),rs.getInt(3));
+				su[i]=new TermSubject(rs.getInt(1),rs.getInt(2),rs.getInt(3));
 				i++;
 			}
 		    rs=stmt.executeQuery("select * from section2");
@@ -40,7 +40,7 @@ public class Table {
 			while(rs.next())  
 			//System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getInt(3));  
 			{
-				spc[i]=new subject(rs.getInt(1),rs.getInt(2),rs.getInt(3));
+				spc[i]=new TermSubject(rs.getInt(1),rs.getInt(2),rs.getInt(3));
 				i++;
 			}
 			rs=stmt.executeQuery("select * from subject");
@@ -67,7 +67,7 @@ public class Table {
 		{
 			for(int j=0;j<7;j++)
 			{
-				if(se[k].t[i][j]==-1)se[k].t[i][j]=0;
+				if(se[k]._timetable[i][j]==-1)se[k]._timetable[i][j]=0;
 			}
 		}
 		}
@@ -77,7 +77,7 @@ public class Table {
 		{
 			for(int j=0;j<7;j++)
 			{
-				if(te[k].t[i][j]==-1)te[k].t[i][j]=se.length;
+				if(te[k]._timetable[i][j]==-1)te[k]._timetable[i][j]=se.length;
 			}
 		}
 		}
@@ -93,7 +93,7 @@ public class Table {
 				 stmt.executeQuery(sq);
 			 for(int i=0;i<5;i++)
 			 {
-			 String sql = "insert into sec"+kk[k]+" values ("+"'"+ days[i] + "'," +"'"+ subj[se[k].t[i][0]] + "'," +"'"+ subj[se[k].t[i][1]] + "'," + "'"+subj[se[k].t[i][2]] + "'," + "'"+subj[se[k].t[i][3]] + "'," +"'"+ subj[se[k].t[i][4]] + "'," +"'"+ subj[se[k].t[i][5]] + "'," +"'"+ subj[se[k].t[i][6]] + "'" +")";
+			 String sql = "insert into sec"+kk[k]+" values ("+"'"+ days[i] + "'," +"'"+ subj[se[k]._timetable[i][0]] + "'," +"'"+ subj[se[k]._timetable[i][1]] + "'," + "'"+subj[se[k]._timetable[i][2]] + "'," + "'"+subj[se[k]._timetable[i][3]] + "'," +"'"+ subj[se[k]._timetable[i][4]] + "'," +"'"+ subj[se[k]._timetable[i][5]] + "'," +"'"+ subj[se[k]._timetable[i][6]] + "'" +")";
 			 stmt.executeUpdate(sql);
 			 }
 			 }
@@ -103,7 +103,7 @@ public class Table {
 				 stmt.executeQuery(sq);
 			 for(int i=0;i<5;i++)
 			 {
-			 String sql = "insert into "+teach[k]+" values ("+"'"+ days[i] + "'," +"'"+ kk[te[k].t[i][0]] + "'," +"'"+ kk[te[k].t[i][1]] + "'," + "'"+kk[te[k].t[i][2]] + "'," + "'"+kk[te[k].t[i][3]] + "'," +"'"+ kk[te[k].t[i][4]] + "'," +"'"+ kk[te[k].t[i][5]] + "'," +"'"+ kk[te[k].t[i][6]] + "'" +")";
+			 String sql = "insert into "+teach[k]+" values ("+"'"+ days[i] + "'," +"'"+ kk[te[k]._timetable[i][0]] + "'," +"'"+ kk[te[k]._timetable[i][1]] + "'," + "'"+kk[te[k]._timetable[i][2]] + "'," + "'"+kk[te[k]._timetable[i][3]] + "'," +"'"+ kk[te[k]._timetable[i][4]] + "'," +"'"+ kk[te[k]._timetable[i][5]] + "'," +"'"+ kk[te[k]._timetable[i][6]] + "'" +")";
 			 stmt.executeUpdate(sql);
 			 }
 			 }
